@@ -178,8 +178,8 @@ residual.lmerMod <- function (model, fn, B){
 #'   @cite Chambers:2013ba
 #'   @cite vanderLeeden:208kv
 .Zbstar.combine <- function(bstar, zstar){
-  bstar <- as.numeric(bstar)
-  zstar <- as.numeric(zstar)
+  bstar <- as.vector(bstar)
+  zstar <- as.vector(zstar)
   lapply(1:length(bstar), function(i){
     t(zstar[i]) %*% bstar[i]
   })

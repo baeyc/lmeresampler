@@ -156,6 +156,21 @@ residual.lmerMod <- function (model, fn, B){
   return(.bootstrap.completion(model, y.star, B, fn))
 }
 
+#' @title Cases Bootstrap
+#'
+#' @description
+#' The Cases Bootstrap samples entire cases to generate the bootstrap.
+#'
+#' @details
+#'
+#' @inheritParams model
+#' @inheritParams fn
+#' @inheritParams B
+#'
+#' @return list
+#'
+#' @references
+#'   @cite vanderLeeden:208kv
 case.lmerMod <- function (model, fn, B){
   
 }

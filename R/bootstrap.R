@@ -156,7 +156,7 @@ residual.lmerMod <- function (model, fn, B){
   return(.bootstrap.completion(model, y.star, B, fn))
 }
 
-case <- function (model, fn, B){
+case.lmerMod <- function (model, fn, B){
   
 }
 

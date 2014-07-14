@@ -120,7 +120,7 @@ residual.lmerMod <- function (model, fn, B){
   #       We should funtionalize the whole resampling process for this part,
   #       perhaps call the function resample.resids or something...
   .resample.resids <- function(model, B){
-    simulate(object = resid(model), nsim = B, replace = true)
+    simulate(object = resid(model), nsim = B, replace = TRUE)
   }
 
   bstar <- lapply(model.ranef,

@@ -172,7 +172,9 @@ residual.lmerMod <- function (model, fn, B){
 #' @references
 #'   @cite vanderLeeden:208kv
 case.lmerMod <- function (model, fn, B){
-  
+  # Draw sample of size J from level-2 units
+  # For each sample, draw a sample of the cases from the level-2 unit
+  # Plugin to .bootstrap.completion
 }
 
 

@@ -173,7 +173,9 @@ residual.lmerMod <- function (model, fn, B){
 #'   @cite vanderLeeden:208kv
 case.lmerMod <- function (model, fn, B){
   # Draw sample of size J from level-2 units
+  level.two.samps <- simulate(object = model, nsim = B, replace = TRUE)
   # For each sample, draw a sample of the cases from the level-2 unit
+  # Use lapply to draw a sample of each case over level.two.samps
   # Plugin to .bootstrap.completion
   
   ## Or alt option

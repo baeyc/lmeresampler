@@ -173,19 +173,16 @@ residual.lmerMod <- function (model, fn, B){
 #' @references
 #'   @cite vanderLeeden:208kv
 case.lmerMod <- function (model, fn, B, extra_step = FALSE){
-  # TODO: put everything below into apply to replicate
-  # ISS: is this the best option? I feel like the return would be huge
-  model.comb.s <- sapply(model, function(x){
-    # Draw sample of size J from level-2 units
-    x.split <- split(x = x@frame, f = x@flist)
-    x.split.samp <- sample(x = x.split, size = length(x.split), replace = TRUE)
-    # For each sample, draw a sample of the cases from the level-2 unit
-    x.comb <- do.call('rbind', x.split.samp)
-    if(extra_step = TRUE){
-      
-    }
-    return(x.comb)
-  })
+  # TODO: put everything below into lapply to replicate
+  # ISS: Is this the best option? Would it return a huge list?
+  # Draw sample of size J from level-2 units
+  model.split <- split(x=model@frame, f=model@flist)
+  model.split.samp <- sample(x=model.split, size = length(model.split), replace = TRUE)
+  # For each sample, draw a sample of the cases from the level-2 unit
+  model.comb <- do.call('rbind', model.split.samp)
+  if(extra_step = TRUE){
+    
+  }
   
   # Plugin to .bootstrap.completion
   return(.bootstrap.completion(model, ystar, B, fn))

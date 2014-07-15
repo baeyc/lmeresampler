@@ -173,6 +173,7 @@ residual.lmerMod <- function (model, fn, B){
 #' @references
 #'   @cite vanderLeeden:208kv
 case.lmerMod <- function (model, fn, B, extra_step = FALSE){
+  # TODO: put everything below into lapply to replicate
   # Draw sample of size J from level-2 units
   model.split <- split(x=model@frame, f=model@flist)
   model.split.samp <- sample(x=model.split, size = length(model.split), replace = TRUE)

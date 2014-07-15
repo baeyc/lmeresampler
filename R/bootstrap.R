@@ -39,7 +39,7 @@ bootstrap <- function (model, fn, type, B){
   switch(type,
          par = parametric.lmerMod(model, fn, B),
          res = residual(model, fn, B),
-         case = case(model, fn, B),
+         case = case(model, fn, B, extra_step = FALSE),
          cgr = cgr(model, fn, B),
          reb = reb(model, fn, B, reb_type = 0),
          reb1 = reb(model, fn, B, reb_type = 1),
@@ -163,6 +163,7 @@ residual.lmerMod <- function (model, fn, B){
 #'
 #' @details
 #'
+#' @param extra_step add the extra step
 #' @inheritParams model
 #' @inheritParams fn
 #' @inheritParams B
@@ -171,12 +172,15 @@ residual.lmerMod <- function (model, fn, B){
 #'
 #' @references
 #'   @cite vanderLeeden:208kv
-case.lmerMod <- function (model, fn, B){
+case.lmerMod <- function (model, fn, B, extra_step = FALSE){
   # Draw sample of size J from level-2 units
   model.split <- split(x=model@frame, f=model@flist)
   model.split.samp <- sample(x=model.split, size = length(model.split), replace = TRUE)
   # For each sample, draw a sample of the cases from the level-2 unit
   model.comb <- do.call('rbind', model.split.samp)
+  if(extra_step = TRUE){
+    
+  }
   # Plugin to .bootstrap.completion
 }
 

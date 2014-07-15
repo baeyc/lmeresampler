@@ -174,7 +174,7 @@ residual.lmerMod <- function (model, fn, B){
 #'   @cite vanderLeeden:208kv
 case.lmerMod <- function (model, fn, B, extra_step = FALSE){
   # TODO: put everything below into apply to replicate
-  # Is this the best option? I feel like the return would be huge
+  # ISS: is this the best option? I feel like the return would be huge
   model.comb.s <- sapply(model, function(x){
     # Draw sample of size J from level-2 units
     x.split <- split(x = x@frame, f = x@flist)

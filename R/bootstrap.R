@@ -176,7 +176,7 @@ case.lmerMod <- function (model, fn, B){
   model.split <- split(x=model@frame, f=model@flist)
   model.split.samp <- sample(x=model.split, size = length(model.split), replace = TRUE)
   # For each sample, draw a sample of the cases from the level-2 unit
-  # Use lapply to draw a sample of each case over level.two.samps
+  model.comb <- do.call('rbind', model.split.samp)
   # Plugin to .bootstrap.completion
 }
 

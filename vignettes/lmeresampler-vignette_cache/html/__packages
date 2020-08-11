@@ -1,0 +1,12 @@
+base
+lmeresampler
+Matrix
+lme4
+nlme
+numDeriv
+dplyr
+purrr
+foreach
+iterators
+doParallel
+tictoc

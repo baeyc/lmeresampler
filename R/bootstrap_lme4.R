@@ -39,7 +39,6 @@ resid_bootstrap.lmerMod <- function(model, .f, B, type, linked = FALSE){
   return(RES)
 }
 
-
 #' @rdname case_bootstrap
 #' @export
 case_bootstrap.lmerMod <- function(model, .f, B, resample, type){
@@ -124,7 +123,6 @@ case_bootstrap.lmerMod <- function(model, .f, B, resample, type){
     reml <- lme4::isREML(model)
     
     tstar <- .f(lme4::lmer(formula = form, data = res, REML = reml)) 
-    return(tstar)
     # tstar <- purrr::map(res, function(x) {
     #   .f(lme4::lmer(formula = form, data = as.data.frame(x), REML = reml)) 
     # })
@@ -137,8 +135,12 @@ case_bootstrap.lmerMod <- function(model, .f, B, resample, type){
       tstar
     }
     return(tstar)
+  } else if (class(model) == "glmerMod"){
+    form <- model@call$formula
+    
+    tstar <- .f(lme4::glmer(formula = form, data = res)) 
   } else{
-    stop("model class must be either 'lme' or 'lmerMod'")
+    stop("model class must be either 'lme', 'lmerMod', or 'glmerMod'")
   }
 }
 
@@ -345,6 +347,12 @@ reb_bootstrap.lmerMod <- function(model, .f, B, reb_type = 0){
     fail.msgs <- purrr::map_chr(tstar[bad.runs], .f = attr, FUN.VALUE = character(1),
                                 "fail.msgs")
   } else fail.msgs <- NULL
+  
+  if(class(model) == "lmerMod" || class(model) == "glmerMod") {
+    data = model@frame
+  } else if (class(model) == "lme") {
+    data = model$data
+  }
   
   # prep for stats df
   replicates <- as.data.frame(t(tstar))

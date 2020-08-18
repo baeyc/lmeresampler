@@ -1,11 +1,12 @@
 library(lme4)
 library(dplyr)
-deer <- read.csv("http://math.carleton.edu/Chihara/Stat330/DeerEcervi.csv")
-deer <- deer %>%
-  mutate(Id = row_number()) 
-deer$Id <- as.numeric(deer$Id)
-deer.glmer3 <- glmer(formula = Ecervi ~ Sex*Length2 + (1|Farm), 
-                     family = binomial, data = deer)
+
+#' @rdname bootstrap
+#' @export
+#' @importFrom stats as.formula cov formula model.matrix na.exclude na.omit predict resid simulate
+bootstrap.glmerMod <- function(model, .f, type = "case", B, resample){
+  case = case_bootstrap.glmerMod(model, .f, B, resample, type = type)
+}
 
 #' @rdname case_bootstrap
 #' @export

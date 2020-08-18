@@ -134,12 +134,11 @@ case_bootstrap.lmerMod <- function(model, .f, B, resample, type){
     } else{
       tstar
     }
-    return(tstar)
   } else if (class(model) == "glmerMod"){
     form <- model@call$formula
     
     tstar <- .f(lme4::glmer(formula = form, data = res)) 
-  } else{
+  } else {
     stop("model class must be either 'lme', 'lmerMod', or 'glmerMod'")
   }
 }
